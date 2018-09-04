@@ -6,7 +6,7 @@ class App extends Component {
     }
     render() {
         return (
-            <div className="App">
+            <div className="container">
                 <h1>Product Management System</h1>
                 <p>{this.state.date.toLocaleTimeString()}</p>
             </div>
