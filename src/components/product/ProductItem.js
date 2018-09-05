@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 
 class ProductItem extends Component {
+
     render() {
-        const {productName, unitPrice, thumbnail} = this.props
+        const {productName, unitPrice, thumbnail} = this.props.product
         return (
             <div className="col-12 col-sm-6 col-md-3">
                 <img className="img-fluid img-thumbnail" src={thumbnail} alt="thumbnail" />
@@ -11,7 +12,7 @@ class ProductItem extends Component {
                 <button 
                     className="btn btn-block btn-secondary title" 
                     value={unitPrice} 
-                    onClick={ (event) => console.log(event.target.value) }
+                    onClick={ () => this.props.addOrder(this.props.product) }
                 >
                     ซื้อ
                 </button>
