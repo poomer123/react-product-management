@@ -24,6 +24,9 @@ class Header extends Component {
                 <div className="col-12 col-md-4 text-right">
                     <h5 className="text-muted pt-3">{this.state.date.toLocaleTimeString()}</h5>
                 </div>
+                <div className="col-12">
+                    <hr />
+                </div>
             </div> 
         )
     }
