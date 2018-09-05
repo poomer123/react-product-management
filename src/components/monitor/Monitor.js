@@ -13,26 +13,20 @@ class Monitor extends Component {
     }
 
     addOrder(product) {
-        console.log(product)
-
         let findOrder = this.state.orders.find( 
-            order => order.product.productId == product.productId
+            order => order.product.productId === product.productId
         )
-        console.log(findOrder)
 
         if(!findOrder) {
             this.state.orders.push({
                 product: product,
                 quantity: 1
             })
-            console.log('ยังไม่มี')
         } else {
             findOrder.quantity++
-            console.log('มีแล้ว')
         }
-        console.log(findOrder)
 
-        let totalPrice = this.state.totalPrice + parseInt(product.unitPrice)
+        let totalPrice = this.state.totalPrice + parseInt(product.unitPrice, 10)
         this.setState({
             totalPrice : totalPrice,
             orders: this.state.orders

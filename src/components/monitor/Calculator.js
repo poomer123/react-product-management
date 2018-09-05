@@ -6,11 +6,11 @@ class Calculator extends Component {
         if(!orders || orders.length === 0) {
             return <li className="text-right text-muted title">ยังไม่ได้เลือกสินค้า</li>
         } else {
-            return orders.map( (order) => {
+            return orders.map( (order, index) => {
                 return (
-                    <li className="text-right text-success tile">
-                        {order.product} x {order.quantity} = {order.product.unitPrice * order.quantity}
-                        <button className="btn btn-light btn-sm text-success">X</button>
+                    <li className="text-right text-success tile" key={index}>
+                        {order.product.productName} x {order.quantity} = {order.product.unitPrice * order.quantity}
+                        <button className="btn btn-light btn-sm text-success ml-2">X</button>
                     </li>
                 )
             })
