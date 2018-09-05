@@ -3,6 +3,10 @@ import Calculator from './Calculator'
 import ProductList from '../product/ProductList'
 
 class Monitor extends Component {
+    state = {
+        totalPrice : 0,
+        orders: [],
+    }
     render() {
         return (
             <div className="row">
@@ -10,7 +14,7 @@ class Monitor extends Component {
                     <ProductList products={this.props.products} />
                 </div>
                 <div className="col-md-3">
-                    <Calculator />
+                    <Calculator totalPrice={this.state.totalPrice} orders={this.state.orders} />
                 </div>
             </div>
         )
