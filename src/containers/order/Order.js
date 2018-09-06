@@ -9,7 +9,7 @@ class Order extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:3001/orders').then(
+        axios.get('http://localhost:3001/orders/').then(
             res => {
                 this.setState({
                     orders: res.data
@@ -19,9 +19,9 @@ class Order extends Component {
     }
 
     delOrder(order) {
-        axios.delete('http://localhost:3001/orders'+order.id).then(
+        axios.delete('http://localhost:3001/orders/'+order.id).then(
             res => {
-                axios.get('http://localhost:3001/orders').then(
+                axios.get('http://localhost:3001/orders/').then(
                     res => {
                         this.setState({
                             orders: res.data
@@ -36,7 +36,6 @@ class Order extends Component {
         return this.state.orders && this.state.orders.map(
             order => {
                 const date = new Date(order.orderedDate)
-                console.log(order.orderedDate)
                 return (
                     <div className="col-md-3" key={order.id}>
                         <hr/>
@@ -65,14 +64,12 @@ class Order extends Component {
 
     render() {
         return (
-            <div>
+            <div className="container-fluid">
                 <Header />
-                    <div className="container-fluid">
-                        <h2>รายการสั่งซื้อ</h2>
-                        <div className="row">
-                            {this.showOrders()}
-                        </div>
-                    </div>
+                <h2>รายการสั่งซื้อ</h2>
+                <div className="row">
+                    {this.showOrders()}
+                </div>
                 <Footer />
             </div>
         )
