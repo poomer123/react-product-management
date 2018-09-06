@@ -26,6 +26,7 @@ class ProductItem extends Component {
                     <button 
                         className="btn btn-info title col-5" 
                         value={unitPrice}
+                        onClick={ () => this.props.editProduct(this.props.product) }
                     >
                         แก้ไข
                     </button>

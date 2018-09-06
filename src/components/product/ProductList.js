@@ -11,6 +11,7 @@ class ProductList extends Component {
                         product={product} 
                         addOrder={this.props.addOrder} 
                         delProduct={this.props.delProduct}
+                        editProduct={this.props.editProduct}
                     />
                 ) 
             )
