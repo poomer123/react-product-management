@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Calculator from './Calculator'
 import ProductList from '../product/ProductList'
+import axios from 'axios'
 
 class Monitor extends Component {
     state = {
@@ -12,6 +13,7 @@ class Monitor extends Component {
         this.addOrder = this.addOrder.bind(this)
         this.delOrder = this.delOrder.bind(this)
         this.cancelOrder = this.cancelOrder.bind(this)
+        this.confirmOrder = this.confirmOrder.bind(this)
     }
 
     addOrder(product) {
@@ -49,6 +51,21 @@ class Monitor extends Component {
         })
     }
 
+    confirmOrder() {
+        const {totalPrice, orders} = this.state
+        axios.post('http://localhost:3001/orders', {
+            orderedDate: new Date(),
+            totalPrice,
+            orders
+        })
+        .then( res => {
+            this.setState({
+                totalPrice: 0,
+                orders: []
+            })
+        })
+    }
+
     cancelOrder() {
         this.setState({
             totalPrice: 0,
@@ -68,6 +85,7 @@ class Monitor extends Component {
                         orders={this.state.orders} 
                         delOrder={this.delOrder} 
                         cancelOrder={this.cancelOrder}
+                        confirmOrder={this.confirmOrder}
                     />
                 </div>
             </div>
