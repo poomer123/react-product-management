@@ -9,6 +9,11 @@ class Product extends Component {
         products: null
     }
 
+    constructor() {
+        super()
+        this.delProduct = this.delProduct.bind(this)
+    }
+
     componentDidMount() {
         axios.get('http://localhost:3001/products').then(
             res => {
@@ -45,7 +50,7 @@ class Product extends Component {
                         <button className="btn btn-success title float-right">เพิ่ม</button>
                     </div>
                 </div>
-                <ProductList products={this.state.products} />
+                <ProductList products={this.state.products} delProduct={this.delProduct} />
                 <Footer />
             </div>
         )
