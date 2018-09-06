@@ -20,7 +20,7 @@ class Monitor extends Component {
 
     addOrder(product) {
         let findOrder = this.state.orders.find( 
-            order => order.product.productId === product.productId
+            order => order.product.id === product.id
         )
 
         if(!findOrder) {
@@ -42,10 +42,10 @@ class Monitor extends Component {
 
     delOrder(product) {
         let findOrder = this.state.orders.find( 
-            order => order.product.productId === product.productId
+            order => order.product.id === product.id
         )
         let rsOrder = this.state.orders.filter(
-            order => order.product.productId !== product.productId
+            order => order.product.id !== product.id
         )
         const totalPrice = this.state.totalPrice - (findOrder.quantity * parseInt(findOrder.product.unitPrice, 10))
         this.setState({

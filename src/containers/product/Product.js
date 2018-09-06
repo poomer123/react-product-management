@@ -30,7 +30,7 @@ class Product extends Component {
                 axios.get('http://localhost:3001/products/').then(
                     res => {
                         this.setState({
-                            orders: res.data
+                            products: res.data
                         })
                     }
                 )

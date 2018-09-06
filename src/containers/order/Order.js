@@ -45,7 +45,7 @@ class Order extends Component {
                                 record => {
                                     console.log(record)
                                     return (
-                                        <li key={record.product.productId}>
+                                        <li key={record.product.id}>
                                             {record.product.productName} x {record.quantity} = {record.quantity * record.product.unitPrice} THB
                                         </li>
                                     )
