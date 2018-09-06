@@ -33,7 +33,7 @@ class Calculator extends Component {
                 </ul>
                 <hr />
                 <button className="btn btn-block btn-danger tile">ยืนยัน</button>
-                <button className="btn btn-block btn-secondary tile">ยกเลิก</button>
+                <button className="btn btn-block btn-secondary tile" onClick={ () => this.props.cancelOrder()}>ยกเลิก</button>
             </div>
         )
     }

@@ -11,6 +11,7 @@ class Monitor extends Component {
         super()
         this.addOrder = this.addOrder.bind(this)
         this.delOrder = this.delOrder.bind(this)
+        this.cancelOrder = this.cancelOrder.bind(this)
     }
 
     addOrder(product) {
@@ -48,6 +49,13 @@ class Monitor extends Component {
         })
     }
 
+    cancelOrder() {
+        this.setState({
+            totalPrice: 0,
+            orders: []
+        })
+    }
+
     render() {
         return (
             <div className="row">
@@ -55,7 +63,12 @@ class Monitor extends Component {
                     <ProductList products={this.props.products} addOrder={this.addOrder} />
                 </div>
                 <div className="col-md-3">
-                    <Calculator totalPrice={this.state.totalPrice} orders={this.state.orders} delOrder={this.delOrder} />
+                    <Calculator 
+                        totalPrice={this.state.totalPrice} 
+                        orders={this.state.orders} 
+                        delOrder={this.delOrder} 
+                        cancelOrder={this.cancelOrder}
+                    />
                 </div>
             </div>
         )
