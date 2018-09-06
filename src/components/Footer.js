@@ -1,7 +1,7 @@
 import React from "react"
 
 const Footer = (props) => {
-    const {company, email} = props
+    const {company = 'Kickdown', email = 'info@kickdown.in.th'} = props
     return (
         <div className="row">
             <div className="col-12">

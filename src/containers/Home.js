@@ -24,7 +24,7 @@ class Home extends Component {
             <div className="container-fluid">
                 <Header />
                 <Monitor products={this.state.products} />
-                <Footer company="Kickdown" email="info@kickdown.in.th" />
+                <Footer />
             </div>
         )
     }
