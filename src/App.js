@@ -1,39 +1,22 @@
 import React, { Component } from 'react'
-import Header from './Header'
-import Monitor from './components/monitor/Monitor'
-import Footer from './Footer'
-import axios from 'axios'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import Home from './containers/Home'
 
 class App extends Component {
-    state = {
-        products : ""
-    }
-    componentDidMount() {
-        // fetch('http://localhost:3001/products', {method: 'GET'})
-        // .then(res => res.json())
-        // .then(res => {
-        //     this.setState({
-        //         products: res
-        //     })
-        // })
 
-        axios.get('http://localhost:3001/products').then(
-            res => {
-                console.log(res.data)
-                this.setState({
-                    products: res.data
-                })
-            }
+    renderRouter() {
+        return (
+            <Switch>
+                <Route path="/" component={Home} />
+            </Switch>
         )
-
     }
+
     render() {
         return (
-            <div className="container-fluid">
-                <Header />
-                <Monitor products={this.state.products} />
-                <Footer company="Kickdown" email="info@kickdown.in.th" />
-            </div>
+            <BrowserRouter>
+                {this.renderRouter()}
+            </BrowserRouter>
         )
     }
 }
