@@ -6,7 +6,9 @@ import axios from 'axios'
 class Monitor extends Component {
     state = {
         totalPrice : 0,
-        orders: []
+        orders: [],
+        confirm: false,
+        msg: ''
     }
     constructor() {
         super()
@@ -33,7 +35,8 @@ class Monitor extends Component {
         let totalPrice = this.state.totalPrice + parseInt(product.unitPrice, 10)
         this.setState({
             totalPrice : totalPrice,
-            orders: this.state.orders
+            orders: this.state.orders,
+            confirm: false
         })
     }
 
@@ -47,48 +50,73 @@ class Monitor extends Component {
         const totalPrice = this.state.totalPrice - (findOrder.quantity * parseInt(findOrder.product.unitPrice, 10))
         this.setState({
             totalPrice: totalPrice,
-            orders: rsOrder
+            orders: rsOrder,
+            confirm: false
         })
     }
 
     confirmOrder() {
         const {totalPrice, orders} = this.state
-        axios.post('http://localhost:3001/orders', {
-            orderedDate: new Date(),
-            totalPrice,
-            orders
-        })
-        .then( res => {
+        if(orders && orders.length > 0) {
+            axios.post('http://localhost:3001/orders', {
+                orderedDate: new Date(),
+                totalPrice,
+                orders
+            })
+            .then( res => {
+                this.setState({
+                    totalPrice: 0,
+                    orders: [],
+                    confirm: true,
+                    msg: 'บันทึกรายการสั่งซื้อเรียบร้อยแล้ว'
+                })
+            })
+        } else {
             this.setState({
                 totalPrice: 0,
-                orders: []
+                orders: [],
+                confirm: true,
+                msg: 'กรุณาเลือกสินค้า'
             })
-        })
+        }
     }
 
     cancelOrder() {
         this.setState({
             totalPrice: 0,
-            orders: []
+            orders: [],
+            confirm: false
         })
     }
 
     render() {
         return (
-            <div className="row">
-                <div className="col-md-9">
-                    <ProductList products={this.props.products} addOrder={this.addOrder} />
+            <div className="container-fluid">
+            {this.state.confirm &&
+                <div className="row">
+                    <div className="col-12">
+                        <div className="alert alert-secondary tile text-right" role='alert'>
+                            {this.state.msg}
+                        </div>
+                    </div>
                 </div>
-                <div className="col-md-3">
-                    <Calculator 
-                        totalPrice={this.state.totalPrice} 
-                        orders={this.state.orders} 
-                        delOrder={this.delOrder} 
-                        cancelOrder={this.cancelOrder}
-                        confirmOrder={this.confirmOrder}
-                    />
+            }
+                <div className="row">
+                    <div className="col-md-9">
+                        <ProductList products={this.props.products} addOrder={this.addOrder} />
+                    </div>
+                    <div className="col-md-3">
+                        <Calculator 
+                            totalPrice={this.state.totalPrice} 
+                            orders={this.state.orders} 
+                            delOrder={this.delOrder} 
+                            cancelOrder={this.cancelOrder}
+                            confirmOrder={this.confirmOrder}
+                        />
+                    </div>
                 </div>
             </div>
+
         )
     }
 }
