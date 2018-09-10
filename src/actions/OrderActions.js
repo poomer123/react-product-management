@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { ORDERS_FETCH } from './types'
 
 export const ordersFetch = () => {
 
@@ -6,7 +7,7 @@ export const ordersFetch = () => {
         axios.get('http://localhost:3001/orders').then(
             res => {
                 dispatch({
-                    type: 'orders_fetch',
+                    type: ORDERS_FETCH,
                     payload: res.data
                 })
             }
