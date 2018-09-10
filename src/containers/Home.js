@@ -2,32 +2,38 @@ import React, { Component } from 'react'
 import Header from '../components/Header'
 import Monitor from '../components/monitor/Monitor'
 import Footer from '../components/Footer'
-import axios from 'axios'
+import { connect } from 'react-redux'
+import { productsFetch } from '../actions/index'
+
 
 class Home extends Component {
-    state = {
-        products : ""
-    }
-    componentDidMount() {
-        axios.get('http://localhost:3001/products').then(
-            res => {
-                console.log(res.data)
-                this.setState({
-                    products: res.data
-                })
-            }
-        )
 
+    componentDidMount() {
+        this.props.productsFetch()
     }
+
     render() {
         return (
             <div className="container-fluid">
                 <Header />
-                <Monitor products={this.state.products} />
+                <Monitor products={this.props.products} />
                 <Footer />
             </div>
         )
     }
 }
 
-export default Home
+// function mapStateToProps(state) {
+//     return {
+//         products: state.products
+//     }
+// }
+
+function mapStateToProps({products}) {
+    return {
+        products
+    }
+}
+
+
+export default connect(mapStateToProps, {productsFetch})(Home)
