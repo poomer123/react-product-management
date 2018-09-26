@@ -1,17 +1,14 @@
 import React, { Component } from 'react'
 import { reduxForm, Field } from 'redux-form'
+import FormField from '../common/FormField'
+import { productFormFields } from './FormFields'
 
 class ProductForm extends Component {
 
-    renderFields() {
-        const formFields = [
-            {name: 'productName', type: 'text'},
-            {name: 'unitPrice', type: 'number'},
-            {name: 'thumbnail', type: 'text'}
-        ]
-        return formFields.map(({name, type}) => {
+    renderFields(productFormFields) {
+        return productFormFields.map(({label, name, type, required},i) => {
             return (
-                <Field name={name} type={type} component='input' />
+                <Field key={i} label={label} name={name} type={type} required={required} component={FormField} />
             )
         })
     }
@@ -19,7 +16,8 @@ class ProductForm extends Component {
     render() {
         return (
             <form>
-                {this.renderFields()}
+                {this.renderFields(productFormFields)}
+                <button className='btn btn-block btn-info title' type='submit'>บันทึก</button>
             </form>
         )
     }
