@@ -6,7 +6,7 @@ import { productFormFields } from './FormFields'
 class ProductForm extends Component {
 
     renderFields(productFormFields) {
-        return productFormFields.map(({label, name, type, required},i) => {
+        return productFormFields.map(({label, name, type, required}, i) => {
             return (
                 <Field key={i} label={label} name={name} type={type} required={required} component={FormField} />
             )
@@ -23,6 +23,17 @@ class ProductForm extends Component {
     }
 }
 
-ProductForm = reduxForm({form : 'productForm'})(ProductForm)
+function validate(values) {
+    console.log(values)
+    const errors = {}
+    productFormFields.forEach(({ name, required }) => {
+        if(!values[name] && required) {
+            errors[name] = 'กรุณาระบุข้อมูล'
+        }
+    })
+    return errors
+}
+
+ProductForm = reduxForm({ validate, form : 'productForm'})(ProductForm)
 
 export default ProductForm
