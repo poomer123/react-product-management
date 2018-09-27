@@ -14,8 +14,10 @@ class ProductForm extends Component {
     }
 
     render() {
+        const {onProductSubmit} = this.props
+        // console.log(onProductSubmit)
         return (
-            <form>
+            <form onSubmit={this.props.handleSubmit(onProductSubmit)} >
                 {this.renderFields(productFormFields)}
                 <button className='btn btn-block btn-info title' type='submit'>บันทึก</button>
             </form>
