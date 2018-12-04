@@ -8,9 +8,8 @@ import ProductForm from '../../components/product/ProductForm'
 class ProductEdit extends Component {
 
     componentDidMount() {
-        console.log(this.props.match.params.id)
         if(this.props.match.params.id) {
-            this.productFetch(this.props.match.params.id)
+            productFetch(this.props.match.params.id)
         }
     }
 
