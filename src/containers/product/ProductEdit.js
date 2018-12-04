@@ -9,7 +9,7 @@ class ProductEdit extends Component {
 
     componentDidMount() {
         if(this.props.match.params.id) {
-            productFetch(this.props.match.params.id)
+            this.props.productFetch(this.props.match.params.id)
         }
     }
 
